@@ -431,6 +431,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             exports.pefcl:setBankBalance(self.PlayerData.source, data)
             self.PlayerData.money[moneytype] = exports.pefcl:getDefaultAccountBalance(self.PlayerData.source).data or 0
         else
+            if not self.PlayerData.money[moneytype] then return false end
             self.PlayerData.money[moneytype] = amount
         end
 
