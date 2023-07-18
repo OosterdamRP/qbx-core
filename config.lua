@@ -35,12 +35,12 @@ QBConfig.Player.IdentifierTypes = {
     },
     ['AccountNumber'] = {
         valueFunction = function()
-            return 'US0' .. math.random(1, 9) .. 'QBCore' .. math.random(1111, 9999) .. math.random(1111, 9999) .. math.random(11, 99)
+            return 'NL06' .. math.random(1, 9) .. 'OD' .. math.random(1111, 9999) .. math.random(1111, 9999) .. math.random(11, 99)
         end,
     },
     ['PhoneNumber'] = {
         valueFunction = function()
-            return math.random(100,999) .. math.random(1000000,9999999)
+            return '06' .. math.random(10000000, 99999999)
         end,
     },
     ['FingerId'] = {
@@ -50,7 +50,7 @@ QBConfig.Player.IdentifierTypes = {
     },
     ['WalletId'] = {
         valueFunction = function()
-            return 'QB-' .. math.random(11111111, 99999999)
+            return 'OD-' .. math.random(11111111, 99999999)
         end,
     },
     ['SerialNumber'] = {
@@ -67,8 +67,8 @@ QBConfig.Server.Uptime = 0 -- Time the server has been up.
 QBConfig.Server.Whitelist = false -- Enable or disable whitelist on the server
 QBConfig.Server.WhitelistPermission = 'admin' -- Permission that's able to enter the server when the whitelist is on
 QBConfig.Server.PVP = true -- Enable or disable pvp on the server (Ability to shoot other players)
-QBConfig.Server.Discord = "" -- Discord invite link
+QBConfig.Server.Discord = "https://discord.gg/A8f9r44NSx" -- Discord invite link
 QBConfig.Server.CheckDuplicateLicense = true -- Check for duplicate rockstar license on join
 QBConfig.Server.Permissions = { 'god', 'admin', 'mod' } -- Add as many groups as you want here after creating them in your server.cfg
 
-QBConfig.NotifyPosition = 'top-right' -- 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left'
+QBConfig.NotifyPosition = 'center-left' -- 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left' | 'center-left' | 'center-right'
