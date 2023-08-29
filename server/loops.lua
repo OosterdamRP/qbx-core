@@ -9,8 +9,8 @@ lib.cron.new(('*/%s * * * *'):format(QBCore.Config.UpdateInterval), function()
             if newThirst <= 0 then
                 newThirst = 0
             end
-            Player.Functions.SetMetaData('dorst', newThirst)
-            Player.Functions.SetMetaData('honger', newHunger)
+            Player.Functions.SetMetaData('thirst', newThirst)
+            Player.Functions.SetMetaData('hunger', newHunger)
             TriggerClientEvent('hud:client:UpdateNeeds', src, newHunger, newThirst)
             Player.Functions.Save()
         end

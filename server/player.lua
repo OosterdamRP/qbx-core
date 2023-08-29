@@ -154,7 +154,7 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     PlayerData.gang.grade.level = PlayerData.gang.grade.level or 0
     -- Other
     PlayerData.position = PlayerData.position or QBConfig.DefaultSpawn
-    PlayerData.items = GetResourceState('qb-inventory') ~= 'missend' and exports['qb-inventory']:LoadInventory(PlayerData.source, PlayerData.citizenid) or {}
+    PlayerData.items = GetResourceState('qb-inventory') ~= 'missing' and exports['qb-inventory']:LoadInventory(PlayerData.source, PlayerData.citizenid) or {}
     return QBCore.Player.CreatePlayer(PlayerData --[[@as PlayerData]], Offline)
 end
 
@@ -174,8 +174,8 @@ function QBCore.Player.Logout(source)
     if newThirst <= 0 then
         newThirst = 0
     end
-    Player.Functions.SetMetaData('dorst', newThirst)
-    Player.Functions.SetMetaData('honger', newHunger)
+    Player.Functions.SetMetaData('thirst', newThirst)
+    Player.Functions.SetMetaData('hunger', newHunger)
     TriggerClientEvent('hud:client:UpdateNeeds', source, newHunger, newThirst)
     Player.Functions.Save()
 
@@ -311,7 +311,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param val any
     function self.Functions.SetMetaData(meta, val)
         if not meta or type(meta) ~= 'string' then return end
-        if meta == 'honger' or meta == 'dorst' then
+        if meta == 'hunger' or meta == 'thirst' then
             val = val > 100 and 100 or val
         end
         self.PlayerData.metadata[meta] = val
@@ -408,8 +408,8 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             if moneytype == 'bank' then
                 TriggerClientEvent('qb-phone:client:RemoveBankMoney', self.PlayerData.source, amount)
             end
-            TriggerClientEvent('QBCore:Client:OnMoneyChange', self.PlayerData.source, moneytype, amount, "verwijderen", reason)
-            TriggerEvent('QBCore:Server:OnMoneyChange', self.PlayerData.source, moneytype, amount, "verwijderen", reason)
+            TriggerClientEvent('QBCore:Client:OnMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
+            TriggerEvent('QBCore:Server:OnMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
         end
 
         return true
