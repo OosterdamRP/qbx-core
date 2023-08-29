@@ -11,40 +11,60 @@ QBShared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefau
 ---@type table<string, Job>
 QBShared.Jobs = {
 	['unemployed'] = {
-		label = 'Civilian',
+		label = 'Burger',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             [0] = {
-                name = 'Freelancer',
+                name = 'Onafhangkelijk',
                 payment = 10
             },
         },
 	},
 	['police'] = {
-		label = 'LSPD',
+		label = 'Politie',
         type = 'leo',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             [0] = {
-                name = 'Recruit',
+                name = 'Aspirant',
                 payment = 50
             },
 			[1] = {
-                name = 'Officer',
+                name = 'Surveillant',
                 payment = 75
             },
 			[2] = {
-                name = 'Sergeant',
+                name = 'Agent',
                 payment = 100
             },
 			[3] = {
-                name = 'Lieutenant',
+                name = 'Hoofdagent',
                 payment = 125
             },
-			[4] = {
-                name = 'Chief',
+            [4] = {
+                name = 'Brigadier',
+                payment = 125
+            },
+            [5] = {
+                name = 'Inspecteur',
+                payment = 125
+            },
+            [6] = {
+                name = 'Hoofdinspecteur',
+                payment = 125
+            },
+            [7] = {
+                name = 'Commissaris',
+                payment = 125
+            },
+            [8] = {
+                name = 'Hoofdcommissaris',
+                payment = 125
+            },
+			[9] = {
+                name = 'Eerste hoofdcommissaris',
 				isboss = true,
                 payment = 150
             },

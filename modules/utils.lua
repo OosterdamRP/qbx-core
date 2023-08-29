@@ -197,7 +197,7 @@ if isServer then
         model = type(model) == 'string' and joaat(model) or model
 
         if not CreateVehicleServerSetter then
-            error('^1CreateVehicleServerSetter is not available on your artifact, please use artifact 5904 or above to be able to use this^0')
+            error('^1CreateVehicleServerSetter is niet beschikbaar op uw artifact, Gebruik artefact 5904 of hoger om dit te kunnen gebruiken^0')
             return
         end
 
@@ -235,7 +235,7 @@ if isServer then
     ---@param setKickReason? fun(reason: string)
     ---@param deferrals? Deferrals
     function KickWithReason(source, reason, setKickReason, deferrals)
-        reason = '\n' .. reason .. '\n🔸 Check our Discord for further information: ' .. QBCore.Config.Server.Discord
+        reason = '\n' .. reason .. '\n🔸 Bekijk onze Discord voor meer informatie: ' .. QBCore.Config.Server.Discord
         if setKickReason then
             setKickReason(reason)
         end
@@ -398,14 +398,14 @@ else
         if not WaitFor(function()
             return NetworkDoesEntityExistWithNetworkId(netId)
         end, 10000) then
-            print(('statebag timed out while awaiting entity creation! (%s)'):format(bagName))
+            print(('statebag time-out tijdens het wachten van entity creatie! (%s)'):format(bagName))
             return 0, 0
         end
 
         local entity = NetworkDoesEntityExistWithNetworkId(netId) and NetworkGetEntityFromNetworkId(netId) or 0
 
         if entity == 0 then
-            print(('statebag received invalid entity! (%s)'):format(bagName))
+            print(('statebag heeft ongeldige entity ontvangen! (%s)'):format(bagName))
             return 0, 0
         end
 
@@ -817,26 +817,26 @@ else
 
     ---Returns the direction the specified entity or local ped is standing towards
     ---@param entity? number defaults to player ped
-    ---@return 'North' | 'South' | 'East' | 'West' | string direction or error message
+    ---@return 'Noord' | 'Zuid' | 'Oost' | 'West' | string direction or error message
     function GetCardinalDirection(entity)
         entity = entity or cache.ped
         if not entity or not DoesEntityExist(entity) then
-            return 'Entity does not exist'
+            return 'Entity bestaat niet'
         end
 
         local heading = GetEntityHeading(entity)
         heading = heading > 360 and heading * (360 / heading) --[[ Making sure the heading is within 360 degrees ]] or heading
         if (heading >= 0 and heading < 45) or (heading >= 315 and heading < 360) then
-            return 'North'
+            return 'Noord'
         elseif heading >= 45 and heading < 135 then
             return 'West'
         elseif heading >= 135 and heading < 225 then
-            return 'South'
+            return 'Zuid'
         elseif heading >= 225 and heading < 315 then
-            return 'East'
+            return 'Oost'
         end
 
-        return 'Couldn\'t find direction'
+        return 'Kan geen richting vinden'
     end
 
     ---@class CurrentTime
@@ -878,7 +878,7 @@ else
             return vec3(coords.x, coords.y, groundZ)
         end
 
-        print('Couldn\'t find Ground Z Coordinates given 3D Coordinates:', coords)
+        print('Kon grond Z-coördinaten niet vinden vanwege de 3D-coördinaten:', coords)
         return coords
     end
 

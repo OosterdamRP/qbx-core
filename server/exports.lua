@@ -161,7 +161,7 @@ exports('AddItem', AddItem)
 -- Single update item
 ---@deprecated incompatible with ox_inventory. Update ox_inventory item config instead.
 local function UpdateItem(itemName, item)
-    print(string.format("%s invoked deprecated function UpdateItem. This is incompatible with ox_inventory", GetInvokingResource()))
+    print(string.format("%s heeft een verouderde functie aangeroepen UpdateItem. Dit is niet compatibel met ox_inventory", GetInvokingResource()))
     if type(itemName) ~= "string" then
         return false, "invalid_item_name"
     end
@@ -180,7 +180,7 @@ exports('UpdateItem', UpdateItem)
 -- Multiple Add Items
 ---@deprecated incompatible with ox_inventory. Update ox_inventory item config instead.
 local function AddItems(items)
-    print(string.format("%s invoked deprecated function AddItems. This is incompatible with ox_inventory", GetInvokingResource()))
+    print(string.format("%s heeft een verouderde functie aangeroepen AddItems. Dit is niet compatibel met ox_inventory", GetInvokingResource()))
     local shouldContinue = true
     local message = "success"
     local errorItem = nil
@@ -215,7 +215,7 @@ exports('AddItems', AddItems)
 -- Single Remove Item
 ---@deprecated incompatible with ox_inventory. Update ox_inventory item config instead.
 local function RemoveItem(itemName)
-    print(string.format("%s invoked deprecated function RemoveItem. This is incompatible with ox_inventory", GetInvokingResource()))
+    print(string.format("%s heeft een verouderde functie aangeroepen RemoveItem. Dit is niet compatibel met ox_inventory", GetInvokingResource()))
     if type(itemName) ~= "string" then
         return false, "invalid_item_name"
     end
@@ -337,7 +337,7 @@ local function GetCoreVersion(InvokingResource)
     ---@diagnostic disable-next-line: missing-parameter
     local resourceVersion = GetResourceMetadata(GetCurrentResourceName(), 'version')
     if InvokingResource and InvokingResource ~= '' then
-        print(("%s called qbcore version check: %s"):format(InvokingResource or 'Unknown Resource', resourceVersion))
+        print(("%s genaamd qbcore versiecontrole: %s"):format(InvokingResource or 'Onbekende bron', resourceVersion))
     end
     return resourceVersion
 end
@@ -361,7 +361,7 @@ local function ExploitBan(playerId, origin)
         })
     end)
     DropPlayer(playerId --[[@as string]], Lang:t('info.exploit_banned', {discord = QBCore.Config.Server.Discord}))
-    TriggerEvent("qb-log:server:CreateLog", "anticheat", "Anti-Cheat", "red", name .. " has been banned for exploiting " .. origin, true)
+    TriggerEvent("qb-log:server:CreateLog", "anticheat", "Anti-Cheat", "red", name .. " is verbannen wegens exploiten " .. origin, true)
 end
 
 exports('ExploitBan', ExploitBan)

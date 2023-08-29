@@ -31,7 +31,7 @@ function QBCore.Player.Login(source, citizenid, newData)
             QBCore.Player.CheckPlayerData(source, PlayerData)
         else
             DropPlayer(tostring(source), Lang:t("info.exploit_dropped"))
-            TriggerEvent('qb-log:server:CreateLog', 'anticheat', 'Anti-Cheat', 'white', ('%s Has Been Dropped For Character Joining Exploit'):format(GetPlayerName(source)), false)
+            TriggerEvent('qb-log:server:CreateLog', 'anticheat', 'Anti-Cheat', 'white', ('%s Is verbannen voor Karakter Joining Exploit'):format(GetPlayerName(source)), false)
         end
     else
         QBCore.Player.CheckPlayerData(source, newData)
@@ -71,12 +71,12 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
 
     -- Charinfo
     PlayerData.charinfo = PlayerData.charinfo or {}
-    PlayerData.charinfo.firstname = PlayerData.charinfo.firstname or 'Firstname'
-    PlayerData.charinfo.lastname = PlayerData.charinfo.lastname or 'Lastname'
+    PlayerData.charinfo.firstname = PlayerData.charinfo.firstname or 'Voornaam'
+    PlayerData.charinfo.lastname = PlayerData.charinfo.lastname or 'Achternaam'
     PlayerData.charinfo.birthdate = PlayerData.charinfo.birthdate or '00-00-0000'
     PlayerData.charinfo.gender = PlayerData.charinfo.gender or 0
-    PlayerData.charinfo.backstory = PlayerData.charinfo.backstory or 'placeholder backstory'
-    PlayerData.charinfo.nationality = PlayerData.charinfo.nationality or 'USA'
+    PlayerData.charinfo.backstory = PlayerData.charinfo.backstory or 'Voorbeeld achtergrondverhaal'
+    PlayerData.charinfo.nationality = PlayerData.charinfo.nationality or 'NL'
     PlayerData.charinfo.phone = PlayerData.charinfo.phone or QBCore.Player.GenerateUniqueIdentifier('PhoneNumber')
     PlayerData.charinfo.account = PlayerData.charinfo.account or QBCore.Player.GenerateUniqueIdentifier('AccountNumber')
     -- Metadata
@@ -106,7 +106,7 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     PlayerData.metadata.jobrep.trucker = PlayerData.metadata.jobrep.trucker or 0
     PlayerData.metadata.jobrep.taxi = PlayerData.metadata.jobrep.taxi or 0
     PlayerData.metadata.jobrep.hotdog = PlayerData.metadata.jobrep.hotdog or 0
-    PlayerData.metadata.callsign = PlayerData.metadata.callsign or 'NO CALLSIGN'
+    PlayerData.metadata.callsign = PlayerData.metadata.callsign or 'GEEN ROEPNUMMER'
     PlayerData.metadata.fingerprint = PlayerData.metadata.fingerprint or QBCore.Player.GenerateUniqueIdentifier('FingerId')
     PlayerData.metadata.walletid = PlayerData.metadata.walletid or QBCore.Player.GenerateUniqueIdentifier('WalletId')
     PlayerData.metadata.criminalrecord = PlayerData.metadata.criminalrecord or {
@@ -132,29 +132,29 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     -- Job
     if PlayerData.job and PlayerData.job.name and not QBCore.Shared.Jobs[PlayerData.job.name] then PlayerData.job = nil end
     PlayerData.job = PlayerData.job or {}
-    PlayerData.job.name = PlayerData.job.name or 'unemployed'
-    PlayerData.job.label = PlayerData.job.label or 'Civilian'
+    PlayerData.job.name = PlayerData.job.name or 'Werkloos'
+    PlayerData.job.label = PlayerData.job.label or 'Burger'
     PlayerData.job.payment = PlayerData.job.payment or 10
-    PlayerData.job.type = PlayerData.job.type or 'none'
+    PlayerData.job.type = PlayerData.job.type or 'geen'
     if QBCore.Shared.ForceJobDefaultDutyAtLogin or PlayerData.job.onduty == nil then
         PlayerData.job.onduty = QBCore.Shared.Jobs[PlayerData.job.name].defaultDuty
     end
     PlayerData.job.isboss = PlayerData.job.isboss or false
     PlayerData.job.grade = PlayerData.job.grade or {}
-    PlayerData.job.grade.name = PlayerData.job.grade.name or 'Freelancer'
+    PlayerData.job.grade.name = PlayerData.job.grade.name or 'Onafhankelijk'
     PlayerData.job.grade.level = PlayerData.job.grade.level or 0
     -- Gang
     if PlayerData.gang and PlayerData.gang.name and not QBCore.Shared.Gangs[PlayerData.gang.name] then PlayerData.gang = nil end
     PlayerData.gang = PlayerData.gang or {}
-    PlayerData.gang.name = PlayerData.gang.name or 'none'
-    PlayerData.gang.label = PlayerData.gang.label or 'No Gang Affiliation'
+    PlayerData.gang.name = PlayerData.gang.name or 'geen'
+    PlayerData.gang.label = PlayerData.gang.label or 'Geen bendelidmaatschap'
     PlayerData.gang.isboss = PlayerData.gang.isboss or false
     PlayerData.gang.grade = PlayerData.gang.grade or {}
     PlayerData.gang.grade.name = PlayerData.gang.grade.name or 'none'
     PlayerData.gang.grade.level = PlayerData.gang.grade.level or 0
     -- Other
     PlayerData.position = PlayerData.position or QBConfig.DefaultSpawn
-    PlayerData.items = GetResourceState('qb-inventory') ~= 'missing' and exports['qb-inventory']:LoadInventory(PlayerData.source, PlayerData.citizenid) or {}
+    PlayerData.items = GetResourceState('qb-inventory') ~= 'missend' and exports['qb-inventory']:LoadInventory(PlayerData.source, PlayerData.citizenid) or {}
     return QBCore.Player.CreatePlayer(PlayerData --[[@as PlayerData]], Offline)
 end
 
@@ -174,8 +174,8 @@ function QBCore.Player.Logout(source)
     if newThirst <= 0 then
         newThirst = 0
     end
-    Player.Functions.SetMetaData('thirst', newThirst)
-    Player.Functions.SetMetaData('hunger', newHunger)
+    Player.Functions.SetMetaData('dorst', newThirst)
+    Player.Functions.SetMetaData('honger', newHunger)
     TriggerClientEvent('hud:client:UpdateNeeds', source, newHunger, newThirst)
     Player.Functions.Save()
 
@@ -237,7 +237,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
         self.PlayerData.job.name = job
         self.PlayerData.job.label = QBCore.Shared.Jobs[job].label
         self.PlayerData.job.onduty = QBCore.Shared.Jobs[job].defaultDuty
-        self.PlayerData.job.type = QBCore.Shared.Jobs[job].type or 'none'
+        self.PlayerData.job.type = QBCore.Shared.Jobs[job].type or 'geen'
         if QBCore.Shared.Jobs[job].grades[grade] then
             local jobgrade = QBCore.Shared.Jobs[job].grades[grade]
             self.PlayerData.job.grade = {}
@@ -247,7 +247,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             self.PlayerData.job.isboss = jobgrade.isboss or false
         else
             self.PlayerData.job.grade = {}
-            self.PlayerData.job.grade.name = 'No Grades'
+            self.PlayerData.job.grade.name = 'Geen rangen'
             self.PlayerData.job.grade.level = 0
             self.PlayerData.job.payment = 30
             self.PlayerData.job.isboss = false
@@ -279,7 +279,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             self.PlayerData.gang.isboss = ganggrade.isboss or false
         else
             self.PlayerData.gang.grade = {}
-            self.PlayerData.gang.grade.name = 'No Grades'
+            self.PlayerData.gang.grade.name = 'Geen rangen'
             self.PlayerData.gang.grade.level = 0
             self.PlayerData.gang.isboss = false
         end
@@ -311,7 +311,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param val any
     function self.Functions.SetMetaData(meta, val)
         if not meta or type(meta) ~= 'string' then return end
-        if meta == 'hunger' or meta == 'thirst' then
+        if meta == 'honger' or meta == 'dorst' then
             val = val > 100 and 100 or val
         end
         self.PlayerData.metadata[meta] = val
@@ -338,7 +338,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param reason? string
     ---@return boolean success if money was added
     function self.Functions.AddMoney(moneytype, amount, reason)
-        reason = reason or 'unknown'
+        reason = reason or 'onbekend'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
         if amount < 0 then return end
@@ -372,7 +372,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param reason? string
     ---@return boolean success if money was removed
     function self.Functions.RemoveMoney(moneytype, amount, reason)
-        reason = reason or 'unknown'
+        reason = reason or 'onbekend'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
         if amount < 0 then return end
@@ -408,8 +408,8 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             if moneytype == 'bank' then
                 TriggerClientEvent('qb-phone:client:RemoveBankMoney', self.PlayerData.source, amount)
             end
-            TriggerClientEvent('QBCore:Client:OnMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
-            TriggerEvent('QBCore:Server:OnMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
+            TriggerClientEvent('QBCore:Client:OnMoneyChange', self.PlayerData.source, moneytype, amount, "verwijderen", reason)
+            TriggerEvent('QBCore:Server:OnMoneyChange', self.PlayerData.source, moneytype, amount, "verwijderen", reason)
         end
 
         return true
@@ -644,7 +644,7 @@ function QBCore.Player.DeleteCharacter(source, citizenid)
         end)
     else
         DropPlayer(tostring(source), Lang:t("info.exploit_dropped"))
-        TriggerEvent('qb-log:server:CreateLog', 'anticheat', 'Anti-Cheat', 'white', GetPlayerName(source) .. ' Has Been Dropped For Character Deletion Exploit', true)
+        TriggerEvent('qb-log:server:CreateLog', 'anticheat', 'Anti-Cheat', 'white', GetPlayerName(source) .. ' Is verbannen wegens verwijdering van karakter Exploit', true)
     end
 end
 
@@ -654,13 +654,13 @@ function QBCore.Player.ForceDeleteCharacter(citizenid)
     if result then
         local Player = QBCore.Functions.GetPlayerByCitizenId(citizenid)
         if Player then
-            DropPlayer(Player.PlayerData.source --[[@as string]], "An admin deleted the character which you are currently using")
+            DropPlayer(Player.PlayerData.source --[[@as string]], "Een admin heeft het personage verwijderd dat je momenteel gebruikt")
         end
 
         CreateThread(function()
             local success = DeletePlayerEntity(citizenid)
             if success then
-                TriggerEvent('qb-log:server:CreateLog', 'joinleave', 'Character Force Deleted', 'red', 'Character **' .. citizenid .. '** got deleted')
+                TriggerEvent('qb-log:server:CreateLog', 'joinleave', 'Karakter verwijderd', 'red', 'Karakter **' .. citizenid .. '** werd verwijderd')
             end
         end)
     end

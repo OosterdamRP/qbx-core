@@ -31,7 +31,7 @@ AddEventHandler('playerDropped', function(reason)
     if not QBCore.Players[src] then return end
     GlobalState.PlayerCount -= 1
     local Player = QBCore.Players[src]
-    TriggerEvent('qb-log:server:CreateLog', 'joinleave', 'Dropped', 'red', '**' .. GetPlayerName(src) .. '** (' .. Player.PlayerData.license .. ') left..' ..'\n **Reason:** ' .. reason)
+    TriggerEvent('qb-log:server:CreateLog', 'joinleave', 'Server verlaten', 'red', '**' .. GetPlayerName(src) .. '** (' .. Player.PlayerData.license .. ') is geleaved..' ..'\n **Reden:** ' .. reason)
     Player.Functions.Save()
     QBCore.Player_Buckets[Player.PlayerData.license] = nil
     QBCore.Players[src] = nil
