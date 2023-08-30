@@ -71,29 +71,57 @@ QBShared.Jobs = {
         },
 	},
 	['bcso'] = {
-		label = 'BCSO',
+		label = 'Kmar',
         type = 'leo',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             [0] = {
-                name = 'Recruit',
+                name = 'Marechaussee der3de Klasse',
                 payment = 50
             },
 			[1] = {
-                name = 'Officer',
+                name = 'Marechaussee der2de Klasse',
                 payment = 75
             },
 			[2] = {
-                name = 'Sergeant',
+                name = 'Marechaussee der1ste Klasse',
                 payment = 100
             },
 			[3] = {
-                name = 'Lieutenant',
+                name = 'Wachtmeester',
                 payment = 125
             },
-			[4] = {
-                name = 'Chief',
+            [4] = {
+                name = 'Opperwachtmeester',
+                payment = 125
+            },
+            [5] = {
+                name = 'Adjudant - Onderofficier',
+                payment = 125
+            },
+            [6] = {
+                name = 'Tweede - Luitenant',
+                payment = 125
+            },
+            [7] = {
+                name = 'Eerste - Luitenant',
+                payment = 125
+            },
+            [8] = {
+                name = 'Kapitein',
+                payment = 125
+            },
+            [9] = {
+                name = 'Majoor',
+                payment = 125
+            },
+            [10] = {
+                name = 'Kolonel',
+                payment = 125
+            },
+			[11] = {
+                name = 'Luitenant-Generaal',
 				isboss = true,
                 payment = 150
             },
@@ -129,29 +157,29 @@ QBShared.Jobs = {
         },
 	},
 	['ambulance'] = {
-		label = 'EMS',
+		label = 'Ambulance',
         type = 'ems',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             [0] = {
-                name = 'Recruit',
+                name = 'Broeder',
                 payment = 50
             },
 			[1] = {
-                name = 'Paramedic',
+                name = 'Verpleegkundige',
                 payment = 75
             },
 			[2] = {
-                name = 'Doctor',
+                name = 'Specialist',
                 payment = 100
             },
 			[3] = {
-                name = 'Surgeon',
+                name = 'Geneeskundige',
                 payment = 125
             },
 			[4] = {
-                name = 'Chief',
+                name = 'Hoofd Geneeskunde',
 				isboss = true,
                 payment = 150
             },
@@ -259,25 +287,69 @@ QBShared.Jobs = {
 		offDutyPay = false,
 		grades = {
             [0] = {
-                name = 'Recruit',
+                name = 'Stagiair',
                 payment = 50
             },
 			[1] = {
-                name = 'Novice',
+                name = 'Uitzendkacht',
                 payment = 75
             },
 			[2] = {
-                name = 'Experienced',
+                name = 'Monteur in opleiding',
                 payment = 100
             },
 			[3] = {
-                name = 'Advanced',
+                name = 'Monteur',
                 payment = 125
             },
 			[4] = {
-                name = 'Manager',
-				isboss = true,
+                name = 'Eerste Monteur',
                 payment = 150
+            },
+            [5] = {
+                name = 'Hoofd-monteur',
+                payment = 150
+            },
+            [6] = {
+                name = 'Autotechnicus in opleiding',
+                payment = 150
+            },
+            [7] = {
+                name = 'Autotechnicus',
+                payment = 150
+            },
+            [8] = {
+                name = 'Technisch Specialist in opleiding',
+                payment = 125
+            },
+            [9] = {
+                name = 'Technisch Specialist',
+                payment = 125
+            },
+            [10] = {
+                name = 'Autotechnisch Ingenieur',
+                payment = 125
+            },
+            [11] = {
+                name = 'Leermeester',
+                payment = 125
+            },
+            [12] = {
+                name = 'Teamleider in opleiding',
+                payment = 125
+            },
+            [13] = {
+                name = 'Teamleider',
+                payment = 125
+            },
+            [14] = {
+                name = 'Directeur',
+                payment = 125
+            },
+            [15] = {
+                name = 'Hoofddirecteur',
+                isboss = true,
+                payment = 125
             },
         },
 	},
