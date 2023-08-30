@@ -71,12 +71,12 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
 
     -- Charinfo
     PlayerData.charinfo = PlayerData.charinfo or {}
-    PlayerData.charinfo.firstname = PlayerData.charinfo.firstname or 'Voornaam'
-    PlayerData.charinfo.lastname = PlayerData.charinfo.lastname or 'Achternaam'
+    PlayerData.charinfo.firstname = PlayerData.charinfo.firstname or 'Firstname'
+    PlayerData.charinfo.lastname = PlayerData.charinfo.lastname or 'Lastname'
     PlayerData.charinfo.birthdate = PlayerData.charinfo.birthdate or '00-00-0000'
     PlayerData.charinfo.gender = PlayerData.charinfo.gender or 0
-    PlayerData.charinfo.backstory = PlayerData.charinfo.backstory or 'Voorbeeld achtergrondverhaal'
-    PlayerData.charinfo.nationality = PlayerData.charinfo.nationality or 'NL'
+    PlayerData.charinfo.backstory = PlayerData.charinfo.backstory or 'placeholder backstory'
+    PlayerData.charinfo.nationality = PlayerData.charinfo.nationality or 'USA'
     PlayerData.charinfo.phone = PlayerData.charinfo.phone or QBCore.Player.GenerateUniqueIdentifier('PhoneNumber')
     PlayerData.charinfo.account = PlayerData.charinfo.account or QBCore.Player.GenerateUniqueIdentifier('AccountNumber')
     -- Metadata
@@ -106,7 +106,7 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     PlayerData.metadata.jobrep.trucker = PlayerData.metadata.jobrep.trucker or 0
     PlayerData.metadata.jobrep.taxi = PlayerData.metadata.jobrep.taxi or 0
     PlayerData.metadata.jobrep.hotdog = PlayerData.metadata.jobrep.hotdog or 0
-    PlayerData.metadata.callsign = PlayerData.metadata.callsign or 'GEEN ROEPNUMMER'
+    PlayerData.metadata.callsign = PlayerData.metadata.callsign or 'NO CALLSIGN'
     PlayerData.metadata.fingerprint = PlayerData.metadata.fingerprint or QBCore.Player.GenerateUniqueIdentifier('FingerId')
     PlayerData.metadata.walletid = PlayerData.metadata.walletid or QBCore.Player.GenerateUniqueIdentifier('WalletId')
     PlayerData.metadata.criminalrecord = PlayerData.metadata.criminalrecord or {
@@ -132,22 +132,22 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     -- Job
     if PlayerData.job and PlayerData.job.name and not QBCore.Shared.Jobs[PlayerData.job.name] then PlayerData.job = nil end
     PlayerData.job = PlayerData.job or {}
-    PlayerData.job.name = PlayerData.job.name or 'Werkloos'
-    PlayerData.job.label = PlayerData.job.label or 'Burger'
+    PlayerData.job.name = PlayerData.job.name or 'unemployed'
+    PlayerData.job.label = PlayerData.job.label or 'civilian'
     PlayerData.job.payment = PlayerData.job.payment or 10
-    PlayerData.job.type = PlayerData.job.type or 'geen'
+    PlayerData.job.type = PlayerData.job.type or 'none'
     if QBCore.Shared.ForceJobDefaultDutyAtLogin or PlayerData.job.onduty == nil then
         PlayerData.job.onduty = QBCore.Shared.Jobs[PlayerData.job.name].defaultDuty
     end
     PlayerData.job.isboss = PlayerData.job.isboss or false
     PlayerData.job.grade = PlayerData.job.grade or {}
-    PlayerData.job.grade.name = PlayerData.job.grade.name or 'Onafhankelijk'
+    PlayerData.job.grade.name = PlayerData.job.grade.name or 'Freelancer'
     PlayerData.job.grade.level = PlayerData.job.grade.level or 0
     -- Gang
     if PlayerData.gang and PlayerData.gang.name and not QBCore.Shared.Gangs[PlayerData.gang.name] then PlayerData.gang = nil end
     PlayerData.gang = PlayerData.gang or {}
-    PlayerData.gang.name = PlayerData.gang.name or 'geen'
-    PlayerData.gang.label = PlayerData.gang.label or 'Geen bendelidmaatschap'
+    PlayerData.gang.name = PlayerData.gang.name or 'none'
+    PlayerData.gang.label = PlayerData.gang.label or 'No Gang Affiliation'
     PlayerData.gang.isboss = PlayerData.gang.isboss or false
     PlayerData.gang.grade = PlayerData.gang.grade or {}
     PlayerData.gang.grade.name = PlayerData.gang.grade.name or 'none'
@@ -237,7 +237,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
         self.PlayerData.job.name = job
         self.PlayerData.job.label = QBCore.Shared.Jobs[job].label
         self.PlayerData.job.onduty = QBCore.Shared.Jobs[job].defaultDuty
-        self.PlayerData.job.type = QBCore.Shared.Jobs[job].type or 'geen'
+        self.PlayerData.job.type = QBCore.Shared.Jobs[job].type or 'none'
         if QBCore.Shared.Jobs[job].grades[grade] then
             local jobgrade = QBCore.Shared.Jobs[job].grades[grade]
             self.PlayerData.job.grade = {}
@@ -247,7 +247,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             self.PlayerData.job.isboss = jobgrade.isboss or false
         else
             self.PlayerData.job.grade = {}
-            self.PlayerData.job.grade.name = 'Geen rangen'
+            self.PlayerData.job.grade.name = 'No Grades'
             self.PlayerData.job.grade.level = 0
             self.PlayerData.job.payment = 30
             self.PlayerData.job.isboss = false
@@ -279,7 +279,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
             self.PlayerData.gang.isboss = ganggrade.isboss or false
         else
             self.PlayerData.gang.grade = {}
-            self.PlayerData.gang.grade.name = 'Geen rangen'
+            self.PlayerData.gang.grade.name = 'No Grades'
             self.PlayerData.gang.grade.level = 0
             self.PlayerData.gang.isboss = false
         end
@@ -338,7 +338,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param reason? string
     ---@return boolean success if money was added
     function self.Functions.AddMoney(moneytype, amount, reason)
-        reason = reason or 'onbekend'
+        reason = reason or 'unknown'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
         if amount < 0 then return end
@@ -372,7 +372,7 @@ function QBCore.Player.CreatePlayer(PlayerData, Offline)
     ---@param reason? string
     ---@return boolean success if money was removed
     function self.Functions.RemoveMoney(moneytype, amount, reason)
-        reason = reason or 'onbekend'
+        reason = reason or 'unknown'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
         if amount < 0 then return end
